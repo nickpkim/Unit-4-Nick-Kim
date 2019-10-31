@@ -6,7 +6,9 @@ public class CoinTester{
     Coin yourCoin = new Coin();
     System.out.println("Your coin = "+yourCoin);
     int headCount = 0;
-    for (int i=1; i<=10; i++){
+    final int NUM_FLIPS = 10;
+    System.out.println("Flipping a coin "+NUM_FLIPS+" times...");
+    for (int i=1; i<=NUM_FLIPS; i++){
       Coin countCoin = new Coin();
       System.out.println("flip"+i+" = "+countCoin);
       if (countCoin.toString().equals("Heads")){
