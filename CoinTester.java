@@ -10,11 +10,13 @@ public class CoinTester{
     System.out.println("Flipping a coin "+NUM_FLIPS+" times...");
     for (int i=1; i<=NUM_FLIPS; i++){
       Coin countCoin = new Coin();
-      System.out.println("flip"+i+" = "+countCoin);
+      System.out.println("Flip #"+i+" = "+countCoin);
       if (countCoin.toString().equals("Heads")){
         headCount++;
       }
     }
-    System.out.println("number of heads = "+headCount);
+    System.out.println("Number of heads = "+headCount);
+    myCoin.setFace(0);
+    System.out.println(myCoin);
   }
 }
