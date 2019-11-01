@@ -5,12 +5,19 @@ public class Car{
   private String model;
   private double mpg;
   private double gallons;
+  private double maxGallons;
+  private double milesLeft;
+  private boolean outOfGas;
 
-  public Car(String carMake, String carModel, double carMPG, double carGallons){
+  public Car(String carMake, String carModel, double carMPG, double carMaxGallons, double carGallons){
     make = carMake;
     model = carModel;
     mpg = carMPG;
+    maxGallons = carMaxGallons;
     gallons = carGallons;
+    milesLeft = carMPG*carGallons;
+    if (carGallons == 0) outOfGas = true;
+    else outOfGas = false;
   }
 
   public String getMake(){
@@ -22,15 +29,36 @@ public class Car{
   public double getMPG(){
     return mpg;
   }
+  public double getMaxGallons(){
+    return maxGallons;
+  }
   public double getGallons(){
     return gallons;
   }
+  public double getMilesLeft(){
+    return milesLeft;
+  }
+  public boolean getOutOfGas(){
+    return outOfGas;
+  }
   public void setGallons(double newGallons){
     gallons = newGallons;
+    milesLeft = mpg*newGallons;
+    if (gallons == 0) outOfGas = true;
+    else outOfGas = false;
+  }
+  public void addGallons(double addedGallons){
+    gallons += addedGallons;
+    milesLeft = mpg*addedGallons;
+    if (gallons > maxGallons){
+      outOfGas = true;
+      System.out.println("Overfueled.");
+    }
   }
 
   public void drive(double miles){
     gallons -= miles/mpg;
+    if (gallons <= 0) outOfGas = true;
   }
 
   public String toString(){
