@@ -49,7 +49,7 @@ public class Car{
   }
   public void addGallons(double addedGallons){
     gallons += addedGallons;
-    milesLeft = mpg*addedGallons;
+    milesLeft = mpg*gallons;
     if (gallons > maxGallons){
       outOfGas = true;
       System.out.println("Overfueled.");
@@ -58,6 +58,7 @@ public class Car{
 
   public void drive(double miles){
     gallons -= miles/mpg;
+    milesLeft = mpg*gallons;
     if (gallons <= 0) outOfGas = true;
   }
 

@@ -1,7 +1,9 @@
 import java.util.Scanner;
-public class CarCreator{
+import java.text.DecimalFormat;
+public class CarClient{
   public static void main(String[] args){
     Scanner scan = new Scanner(System.in);
+    DecimalFormat fmt = new DecimalFormat(".00");
     Car myCar = new Car("Wayne", "Batmobile", 101, 505, 0);
     final double FIRST_DRIVE = 56.7;
 
@@ -18,17 +20,19 @@ public class CarCreator{
     System.out.println("Took'er fer a spin ("+FIRST_DRIVE+" miles):\n"+myCar);
 
     while (!myCar.getOutOfGas()){
-      System.out.println("How many more miles shall I go? ("+myCar.getMilesLeft()+" miles left. Type \"fill'er up\" to fill'er up)");
+      System.out.println("How many more miles shall I go? ("+fmt.format(myCar.getMilesLeft())+" miles left. Type \"fill'er up\" to fill'er up)");
       String input = scan.nextLine();
       if (input.equals("fill'er up")){
         System.out.println("How much?");
         myCar.addGallons(scan.nextDouble());
-      }
-      myCar.drive(scan.nextDouble());
-      if (myCar.getOutOfGas()){
-        System.out.println("OUT OF GAS");
+        String toss = scan.nextLine();
       } else {
-        System.out.println(myCar);
+        myCar.drive(Double.parseDouble(input));
+        if (myCar.getOutOfGas()){
+          System.out.println("OUT OF GAS");
+        } else {
+          System.out.println(myCar);
+        }
       }
     }
   }
