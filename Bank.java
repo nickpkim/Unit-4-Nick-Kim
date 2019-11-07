@@ -35,7 +35,7 @@ public class Bank{
     balance += $;
     System.out.println("\nDeposited: $"+fmt.format($)+"\n");
   }
-  public void withdrawal(double $){
+  public void withdraw(double $){
     balance -= $;
     System.out.println("\nWithdrew: $"+fmt.format($)+"\n");
   }
