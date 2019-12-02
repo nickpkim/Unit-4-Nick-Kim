@@ -7,11 +7,11 @@ public class Bank{
     private String pass;
     private double balance;
     public Bank(int newAccNum, String newName, String newEmail, String newPass, double newBalance){
-      accNum = newAccNum;
-      name = newName;
-      email = newEmail;
-      pass = newPass;
-      balance = newBalance;
+        accNum = newAccNum;
+        name = newName;
+        email = newEmail;
+        pass = newPass;
+        balance = newBalance;
     }
     /*public int getAccNum(){
       return accNum;

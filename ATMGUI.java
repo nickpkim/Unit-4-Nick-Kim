@@ -15,5 +15,3 @@ public class ATMGUI extends Application {
         launch(args);
     }
 }
-
-// git clone (url)

@@ -1,7 +1,7 @@
 import java.text.DecimalFormat;
 public class BankAccount{
     private DecimalFormat fmt = new DecimalFormat(".00");
-    private int nick ;
+    private int accNum;
     private String name;
     private String email;
     private String pass;
