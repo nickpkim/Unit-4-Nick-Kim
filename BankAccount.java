@@ -8,7 +8,7 @@ public class BankAccount{
     private double balance;
     public BankAccount(int newAccNum, String newName, String newEmail, String newPass, double newBalance){
         accNum = newAccNum;
-        name = freegemvirus
+        name = newName;
         email = newEmail;
         pass = newPass;
         balance = newBalance;
