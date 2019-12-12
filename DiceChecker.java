@@ -13,6 +13,9 @@ public class DiceChecker {
         loseAllPoints = false;
         turnPoints = 0;
     }
+    public void resetTurnPoints(){
+        turnPoints = 0;
+    }
     public void pigCheck(int die1, int die2){
         sameTurn = true;
         loseTurnPoints = false;
@@ -29,11 +32,16 @@ public class DiceChecker {
             turnPoints += die2;
         }
     }
-    public boolean getSameTurn(){
-        return sameTurn;
+    public void farkleCheck(int die1, int die2, int die3, int die4, int die5, int die6){
+        sameTurn = true;
+        loseTurnPoints = false;
+        loseAllPoints = false;
+        if (die1 == 1 || die2 == 1)
     }
-    public boolean getLoseTurnPoints(){
-        return loseTurnPoints;
+    public void getLoseTurnPoints(){
+        if (loseTurnPoints){
+            turnPoints = 0;
+        }
     }
     public boolean getLoseAllPoints(){
         return loseAllPoints;
@@ -41,4 +49,16 @@ public class DiceChecker {
     public int getTurnPoints(){
         return turnPoints;
     }
+    public boolean getSameTurn(){
+        return sameTurn;
+    }
+    /*public boolean getLoseTurnPoints(){
+        return loseTurnPoints;
+    }
+    public boolean getLoseAllPoints(){
+        return loseAllPoints;
+    }
+    public int getTurnPoints(){
+        return turnPoints;
+    }*/
 }

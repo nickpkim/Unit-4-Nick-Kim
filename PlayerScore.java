@@ -2,11 +2,14 @@ public class PlayerScore {
 
     private int score;
 
-    public Score(){
+    public PlayerScore(){
         score = 0;
     }
     public void addScore(int toAdd){
         score += toAdd;
+    }
+    public void scoreZero(){
+        score = 0;
     }
     public int getScore() {
         return score;
