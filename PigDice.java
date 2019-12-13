@@ -2,6 +2,24 @@ import java.util.Scanner;
 public class PigDice {
     public static void main(String[]args){
         Scanner scan = new Scanner(System.in);
+        boolean run = true;
+        boolean computer = false;
+
+        while (run) {
+            System.out.println("Player vs Player: press p");
+            System.out.println("Player vs Computer: press c");
+            String action = scan.nextLine();
+
+            if (action.equals("p")){
+                run = false;
+            }
+            if (action.equals("c")){
+                computer = true;
+                run = false;
+            }
+        }
+
+        run = true;
 
         Player p1 = new Player(1);
         Player p2 = new Player(2);
@@ -14,11 +32,10 @@ public class PigDice {
         Die d1 = new Die();
         Die d2 = new Die();
 
-        DiceChecker check = new DiceChecker();
+        PigDiceChecker check = new PigDiceChecker();
 
         System.out.println("r to roll, p to pass, q to quit game");
 
-        boolean run = true;
         while (run) {
             System.out.println("Player 1: "+p1score.getPoints());
             System.out.println("Player 2: "+p2score.getPoints());
@@ -31,9 +48,7 @@ public class PigDice {
                 d2.roll();
                 System.out.println("Dice: "+d1.getFace()+" "+d2.getFace());
                 check.pigCheck(d1.getFace(),d2.getFace());
-                System.out.println("turn points: "+check.getTurnPoints());
                 check.getLoseTurnPoints();
-                System.out.println("turn points: "+check.getTurnPoints());
                 if (check.getLoseAllPoints()){
                     if (t.getTurn() == 1){
                         p1score.scoreZero();
@@ -42,7 +57,6 @@ public class PigDice {
                         p2score.scoreZero();
                     }
                 }
-                System.out.println("turn points: "+check.getTurnPoints());
                 if (!check.getSameTurn()){
                     t.nextTurn();
                 }
