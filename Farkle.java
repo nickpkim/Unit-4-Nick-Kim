@@ -52,9 +52,11 @@ public class Farkle {
             String action = scan.nextLine();
 
             if (action.equals("r")) {
-                d1.roll();
-                d2.roll();
-                System.out.println("Dice: "+d1.getFace()+" "+d2.getFace());
+                for (int i=0; i<check.getDiceToRoll(); i++){
+                    d1.roll();
+                    dice.add(d1.getFace());
+                }
+                System.out.println("Dice: "+dice);
                 check.pigCheck(d1.getFace(),d2.getFace());
                 check.getLoseTurnPoints();
                 if (check.getLoseAllPoints()){
