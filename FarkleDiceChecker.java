@@ -2,7 +2,8 @@ import java.util.*;
 
 public class FarkleDiceChecker {
 
-    private int numOfDice;
+    private int diceRolled;
+    private int diceToRoll;
     private boolean sameTurn;
     private boolean loseTurnPoints;
     private int turnPoints;
@@ -19,7 +20,8 @@ public class FarkleDiceChecker {
     private boolean straight;
 
     public FarkleDiceChecker(){
-        numOfDice = 6;
+        diceRolled = 6;
+        diceToRoll = 6;
         sameTurn = true;
         loseTurnPoints = false;
         turnPoints = 0;
@@ -75,6 +77,10 @@ public class FarkleDiceChecker {
             sameTurn = true;
         } else if (Collections.frequency(freq,4) > 0) {
             sameTurn = true;
+        } else if (Collections.frequency(freq,5) > 0) {
+            sameTurn = true;
+        } else if (Collections.frequency(freq,6) > 0) {
+            sameTurn = true;
         } else if (Collections.frequency(freq,2) == 3) {
             sameTurn = true;
         } else {
@@ -112,6 +118,10 @@ public class FarkleDiceChecker {
             sameTurn = true;
         } else if (Collections.frequency(freq,3) > 0) {
             sameTurn = true;
+        } else if (Collections.frequency(freq,4) > 0) {
+            sameTurn = true;
+        } else if (Collections.frequency(freq,5) > 0) {
+            sameTurn = true;
         } else {
             loseTurnPoints = true;
         }
@@ -145,6 +155,8 @@ public class FarkleDiceChecker {
         if (ones > 0 || fives > 0){
             sameTurn = true;
         } else if (Collections.frequency(freq,3) > 0) {
+            sameTurn = true;
+        } else if (Collections.frequency(freq,4) > 0) {
             sameTurn = true;
         } else {
             loseTurnPoints = true;
@@ -219,7 +231,8 @@ public class FarkleDiceChecker {
         }
     }
 
-    public void pointCheck(int die1, int die2, int die3, int die4, int die5, int die6){
+    public void pointCount(int die1, int die2, int die3, int die4, int die5, int die6){
+        diceToRoll = 6;
 
         ArrayList<Integer> dice = new ArrayList<Integer>();
         dice.add(die1);
@@ -252,15 +265,382 @@ public class FarkleDiceChecker {
         straightList.add(4);
         straightList.add(5);
         straightList.add(6);
-        if (dice.equals(straightList)) {
+
+        if (Collections.frequency(freq,3) == 2) {
+            turnPoints += 2500;
+        } else if (dice.equals(straightList)){
             turnPoints += 1500;
+        } else if (Collections.frequency(freq,2) == 3){
+            turnPoints += 1500;
+        } else if (Collections.frequency(freq,4) == 1 && Collections.frequency(freq,2) == 1){
+            turnPoints += 1500;
+        } else if (Collections.frequency(freq,6) == 1){
+            turnPoints += 3000;
+        } else if (Collections.frequency(freq,5) == 1){
+            turnPoints += 2000;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (Collections.frequency(freq,4) == 1){
+            turnPoints += 1000;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (sixes == 3){
+            turnPoints += 600;
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (fives == 3){
+            turnPoints += 500;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+        } else if (fours == 3){
+            turnPoints += 400;
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (threes == 3){
+            turnPoints += 300;
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (twos == 3){
+            turnPoints += 200;
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (ones == 3){
+            turnPoints += 300;
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else {
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
         }
     }
+    public void pointCount(int die1, int die2, int die3, int die4, int die5){
+        diceToRoll = diceRolled - 5;
+        if (diceToRoll == 0){
+            diceToRoll = 6;
+        }
 
+        ArrayList<Integer> dice = new ArrayList<Integer>();
+        dice.add(die1);
+        dice.add(die2);
+        dice.add(die3);
+        dice.add(die4);
+        dice.add(die5);
+        Collections.sort(dice);
+
+        ones = Collections.frequency(dice,1);
+        twos = Collections.frequency(dice,2);
+        threes = Collections.frequency(dice,3);
+        fours = Collections.frequency(dice,4);
+        fives = Collections.frequency(dice,5);
+        sixes = Collections.frequency(dice,6);
+
+        ArrayList<Integer> freq = new ArrayList<Integer>();
+        freq.add(ones);
+        freq.add(twos);
+        freq.add(threes);
+        freq.add(fours);
+        freq.add(fives);
+        freq.add(sixes);
+
+        if (Collections.frequency(freq,5) == 1){
+            turnPoints += 2000;
+        } else if (Collections.frequency(freq,4) == 1){
+            turnPoints += 1000;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (sixes == 3){
+            turnPoints += 600;
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (fives == 3){
+            turnPoints += 500;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+        } else if (fours == 3){
+            turnPoints += 400;
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (threes == 3){
+            turnPoints += 300;
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (twos == 3){
+            turnPoints += 200;
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (ones == 3){
+            turnPoints += 300;
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else {
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        }
+    }
+    public void pointCount(int die1, int die2, int die3, int die4){
+        diceToRoll = diceRolled - 4;
+        if (diceToRoll == 0){
+            diceToRoll = 6;
+        }
+
+        ArrayList<Integer> dice = new ArrayList<Integer>();
+        dice.add(die1);
+        dice.add(die2);
+        dice.add(die3);
+        dice.add(die4);
+        Collections.sort(dice);
+
+        ones = Collections.frequency(dice,1);
+        twos = Collections.frequency(dice,2);
+        threes = Collections.frequency(dice,3);
+        fours = Collections.frequency(dice,4);
+        fives = Collections.frequency(dice,5);
+        sixes = Collections.frequency(dice,6);
+
+        ArrayList<Integer> freq = new ArrayList<Integer>();
+        freq.add(ones);
+        freq.add(twos);
+        freq.add(threes);
+        freq.add(fours);
+        freq.add(fives);
+        freq.add(sixes);
+
+        if (Collections.frequency(freq,4) == 1){
+            turnPoints += 1000;
+        } else if (sixes == 3){
+            turnPoints += 600;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (fives == 3){
+            turnPoints += 500;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+        } else if (fours == 3){
+            turnPoints += 400;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (threes == 3){
+            turnPoints += 300;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (twos == 3){
+            turnPoints += 200;
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else if (ones == 3){
+            turnPoints += 300;
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        } else {
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        }
+    }
+    public void pointCount(int die1, int die2, int die3){
+        diceToRoll = diceRolled - 3;
+        if (diceToRoll == 0){
+            diceToRoll = 6;
+        }
+
+        ArrayList<Integer> dice = new ArrayList<Integer>();
+        dice.add(die1);
+        dice.add(die2);
+        dice.add(die3);
+        Collections.sort(dice);
+
+        ones = Collections.frequency(dice,1);
+        twos = Collections.frequency(dice,2);
+        threes = Collections.frequency(dice,3);
+        fours = Collections.frequency(dice,4);
+        fives = Collections.frequency(dice,5);
+        sixes = Collections.frequency(dice,6);
+
+        if (sixes == 3){
+            turnPoints += 600;
+        } else if (fives == 3){
+            turnPoints += 500;
+        } else if (fours == 3){
+            turnPoints += 400;
+        } else if (threes == 3){
+            turnPoints += 300;
+        } else if (twos == 3){
+            turnPoints += 200;
+        } else if (ones == 3){
+            turnPoints += 300;
+        } else {
+            if (ones == 2){
+                turnPoints += 200;
+            }
+            if (ones == 1 || fives == 2){
+                turnPoints += 100;
+            }
+            if (fives == 1){
+                turnPoints += 50;
+            }
+        }
+    }
+    public void pointCount(int die1, int die2){
+        diceToRoll = diceRolled - 2;
+        if (diceToRoll == 0){
+            diceToRoll = 6;
+        }
+
+        ArrayList<Integer> dice = new ArrayList<Integer>();
+        dice.add(die1);
+        dice.add(die2);
+        Collections.sort(dice);
+
+        ones = Collections.frequency(dice,1);
+        fives = Collections.frequency(dice,5);
+
+        if (ones == 2){
+            turnPoints += 200;
+        }
+        if (ones == 1 || fives == 2){
+            turnPoints += 100;
+        }
+        if (fives == 1){
+            turnPoints += 50;
+        }
+    }
+    public void pointCount(int die1){
+        diceToRoll = diceRolled - 1;
+        if (diceToRoll == 0){
+            diceToRoll = 6;
+        }
+
+        ArrayList<Integer> dice = new ArrayList<Integer>();
+        dice.add(die1);
+        Collections.sort(dice);
+
+        ones = Collections.frequency(dice,1);
+        fives = Collections.frequency(dice,5);
+
+        if (ones == 1){
+            turnPoints += 100;
+        }
+        if (fives == 1){
+            turnPoints += 50;
+        }
+    }
     public int getTurnPoints(){
         return turnPoints;
     }
     public boolean getSameTurn(){
         return sameTurn;
+    }
+    public int getDiceToRoll(){
+        return diceToRoll;
     }
 }
