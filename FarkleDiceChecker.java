@@ -38,11 +38,6 @@ public class FarkleDiceChecker {
     public void resetTurnPoints(){
         turnPoints = 0;
     }
-    public void getLoseTurnPoints(){
-        if (loseTurnPoints){
-            turnPoints = 0;
-        }
-    }
     public void farkleCheck(int die1, int die2, int die3, int die4, int die5, int die6){
         sameTurn = false;
         loseTurnPoints = false;
@@ -350,7 +345,10 @@ public class FarkleDiceChecker {
             if (ones == 2){
                 turnPoints += 200;
             }
-            if (ones == 1 || fives == 2){
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 2){
                 turnPoints += 100;
             }
             if (fives == 1){
@@ -455,7 +453,10 @@ public class FarkleDiceChecker {
             if (ones == 2){
                 turnPoints += 200;
             }
-            if (ones == 1 || fives == 2){
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 2){
                 turnPoints += 100;
             }
             if (fives == 1){
@@ -539,7 +540,10 @@ public class FarkleDiceChecker {
             if (ones == 2){
                 turnPoints += 200;
             }
-            if (ones == 1 || fives == 2){
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 2){
                 turnPoints += 100;
             }
             if (fives == 1){
@@ -582,7 +586,10 @@ public class FarkleDiceChecker {
             if (ones == 2){
                 turnPoints += 200;
             }
-            if (ones == 1 || fives == 2){
+            if (ones == 1){
+                turnPoints += 100;
+            }
+            if (fives == 2){
                 turnPoints += 100;
             }
             if (fives == 1){
@@ -607,7 +614,10 @@ public class FarkleDiceChecker {
         if (ones == 2){
             turnPoints += 200;
         }
-        if (ones == 1 || fives == 2){
+        if (ones == 1){
+            turnPoints += 100;
+        }
+        if (fives == 2){
             turnPoints += 100;
         }
         if (fives == 1){
@@ -615,7 +625,7 @@ public class FarkleDiceChecker {
         }
     }
     public void pointCount(int die1){
-        diceToRoll = diceRolled - 1;
+        diceToRoll = diceToRoll - 1;
         if (diceToRoll == 0){
             diceToRoll = 6;
         }
@@ -640,7 +650,8 @@ public class FarkleDiceChecker {
     public boolean getSameTurn(){
         return sameTurn;
     }
-    public int getDiceToRoll(){
-        return diceToRoll;
-    }
+    public boolean getLoseTurnPoints() { return loseTurnPoints; }
+
+    public void resetDiceToRoll() { diceToRoll = 6; }
+    public int getDiceToRoll() { return diceToRoll; }
 }
