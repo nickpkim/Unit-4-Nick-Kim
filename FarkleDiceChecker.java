@@ -38,6 +38,13 @@ public class FarkleDiceChecker {
     public void resetTurnPoints(){
         turnPoints = 0;
     }
+
+    // The first main function in this class is farkleCheck, which determines if the current player is able to accumulate
+    // points and roll again. farkleCheck is overloaded to six methods with slight differentiations. This is because the
+    // parameters are dependent on how many dice the player is rolling. The creation of frequency variables, lists, and
+    // if statements all have to do with the scoring system. If there is a possibility for the player to accumulate points,
+    // sameTurn is true. If there isn't, sameTurn is false.
+
     public void farkleCheck(int die1, int die2, int die3, int die4, int die5, int die6){
         sameTurn = false;
         loseTurnPoints = false;
@@ -225,6 +232,11 @@ public class FarkleDiceChecker {
             loseTurnPoints = true;
         }
     }
+
+    // The second main function in this class is pointCount, which determines how many points are accumulated from the
+    // selected dice. pointCount is overloaded to six methods with slight differentiations. This is because the parameters
+    // are dependent on how many dice the player selected for points. The creation of frequency variables and lists and
+    // if statements all have to do with the way dice are scored. Then, the turn points are added.
 
     public void pointCount(int die1, int die2, int die3, int die4, int die5, int die6){
         diceToRoll = 6;
@@ -644,14 +656,15 @@ public class FarkleDiceChecker {
             turnPoints += 50;
         }
     }
+
     public int getTurnPoints(){
         return turnPoints;
     }
     public boolean getSameTurn(){
         return sameTurn;
     }
-    public boolean getLoseTurnPoints() { return loseTurnPoints; }
 
+    public boolean getLoseTurnPoints() { return loseTurnPoints; }
     public void resetDiceToRoll() { diceToRoll = 6; }
     public int getDiceToRoll() { return diceToRoll; }
 }
